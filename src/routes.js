@@ -31,11 +31,6 @@ const Found = resolve => {
         resolve(require('./components/Found.vue'))
     })
 };
-const SignUp = resolve => {
-    require.ensure(['./components/SignUp.vue'], () => {
-        resolve(require('./components/SignUp.vue'))
-    })
-};
 
 
 export const routes = [
@@ -46,8 +41,6 @@ export const routes = [
             { path: 'found', component: Found, name: 'found'}
         ] },
     { path: '/members', component: Members, name: 'members' },
-    { path: '/contacts', component: Contact, name: 'contacts', children: [
-            { path: 'signup', component: SignUp, name: 'signup'}
-        ] },
+    { path: '/contacts', component: Contact, name: 'contacts'},
     { path: '*', redirect: '/'}
 ];

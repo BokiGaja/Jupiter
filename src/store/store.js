@@ -17,6 +17,13 @@ export const store = new Vuex.Store({
     dogsLost: [],
     dogsFound: [],
     dogsAdopt: [],
+    members: [],
+    donors: [],
+    newMember(slika, ime, status) {
+      this.slika = slika;
+      this.ime = ime;
+      this.status = status;
+    },
     newDog(slika, ime, rasa, osobine) {
         this.slika = slika;
         this.ime = ime;
@@ -26,6 +33,8 @@ export const store = new Vuex.Store({
     numPageAdopt: 1,
     numPageLost: 1,
     numPageFound: 1,
+    numPageMembers: 1,
+    numPageDonors: 1,
     dogForAdoption: "",
     adoptionInProcess: false
   },
@@ -49,6 +58,12 @@ export const store = new Vuex.Store({
     },
     numberPageFound: state => {
       return state.numPageFound
+    },
+    numberPageMembers: state => {
+      return state.numPageMembers
+    },
+    numberPageDonors: state => {
+      return state.numPageDonors
     }
   },
   mutations: {
@@ -90,7 +105,28 @@ export const store = new Vuex.Store({
     },
     changePageFound: (state, newPage) => {
       state.numPageFound = newPage;
+    },
+    newMember: (state, {slika, ime, status}) => {
+      var member = new state.newMember(slika, ime, status);
+      state.members.push(member);
+    },
+    newDonor: (state, {slika, ime, status}) => {
+      var donor = new state.newMember(slika, ime, status);
+      state.donors.push(donor);
+    },
+    removeMember: (state, index) => {
+      state.members.splice(index, 1)
+    },
+    removeDonors: (state, index) => {
+      state.donors.splice(index, 1)
+    },
+    changePageMembers: (state, newPage) => {
+      state.numPageMembers =  newPage
+    },
+    changePageDonors: (state, newPage) => {
+      state.numPageDonors =  newPage
     }
+
   },
   actions: {
     // Here you can run async task and than commit mutations
@@ -108,7 +144,14 @@ export const store = new Vuex.Store({
     },
     addFound: ({commit}, {slika, ime, rasa, osobine}) => {
       commit('newDogFound', {slika, ime, rasa, osobine});
-    }
+    },
+    addMember: ({commit}, {slika, ime, status}) => {
+      commit('newMember', {slika, ime, status});
+    },
+    addDonor: ({commit}, {slika, ime, status}) => {
+      commit('newDonor', {slika, ime, status});
+    },
+
   }
 
 });
