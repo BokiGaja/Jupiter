@@ -23,8 +23,11 @@
     flex-direction: column;
     align-content: center;
     width: 100%;
-    background-image: url("./background.jpg");
+    background-image: url("../src/components/img/backgroundWhite.jpg");
+    background-color: grey;
+    background-blend-mode: screen;
     background-size: cover;
+    background-position:center;
     overflow-x: hidden;
     overflow-y: auto;
     height: 100%;
