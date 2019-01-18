@@ -14,6 +14,7 @@
     "vue-canvasvideo": "^1.0.0",
     "vue-carousel": "^0.17.0",
     "vue-router": "^3.0.2",
+    "vue-scrollto": "^2.13.0",
     "vue-video-background": "^0.1.2",
     "vue-videobg": "^2.0.0",
     "vue-youtube-embed": "^2.2.1",

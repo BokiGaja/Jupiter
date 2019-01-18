@@ -1,0 +1,35 @@
+.dogCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-content: flex-start;
+}
+#picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 15%;
+    transition: transform .2s;
+}
+#picture:hover {
+    transform: scale(3);
+    z-index: 1;
+}
+.frame {
+    background: url("../img/adoptionFormBackground.jpg") center;
+    background-size: 50%;
+    width: 450px;
+    height: 250px;
+    border-radius: 20%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 30px;
+    margin-right: 30px;
+}
+.text-part {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+}

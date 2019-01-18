@@ -1,0 +1,9 @@
+.numOfPages {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.btnOfPage {
+    margin-top: 10px;
+    margin-left: 10px;
+}

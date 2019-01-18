@@ -14,19 +14,10 @@
         <transition name="slide" mode="out-in">
             <router-view></router-view>
         </transition>
-        <transition name="slide" mode="out-in">
-            <app-adoption-form id="adoption-form"></app-adoption-form>
-        </transition>
     </div>
 </template>
 
 <script>
-    import AdoptionForm from './Dogs/AdoptionForm.vue'
-    export default {
-        components: {
-            appAdoptionForm: AdoptionForm
-        }
-    }
 </script>
 
 <style scoped>

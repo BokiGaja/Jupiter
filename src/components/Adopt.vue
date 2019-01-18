@@ -1,14 +1,35 @@
 <template>
-    <div>
-        <app-adoption></app-adoption>
+    <div class="container">
+        <app-profile></app-profile>
+        <app-new-profile></app-new-profile>
+        <transition name="slide" mode="out-in">
+            <app-adoption-form id="adoption-form" v-if="adoptionProcess"></app-adoption-form>
+        </transition>
+        <app-number-of-pages></app-number-of-pages>
     </div>
 </template>
 
 <script>
-    import Adoption from './Dogs/Adoption.vue'
+    import Profile from './Dogs/AdoptionProfile.vue'
+    import NewProfile from './Dogs/NewProfile.vue'
+    import AdoptionForm from './Dogs/AdoptionForm.vue'
+    import NoP from './NumberOfPages/numbersOfPages.vue'
+    import { mapGetters } from 'vuex'
     export default {
+        computed: {
+          ...mapGetters([
+              'adoptionProcess'
+          ])
+        },
         components: {
-           appAdoption: Adoption
+            appProfile: Profile,
+            appNewProfile: NewProfile,
+            appAdoptionForm: AdoptionForm,
+            appNumberOfPages: NoP
         }
     }
 </script>
+
+<style>
+    @import "./Styles/dogsWindows.css";
+</style>
