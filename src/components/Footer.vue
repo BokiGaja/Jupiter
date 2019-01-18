@@ -1,9 +1,9 @@
 <template>
     <div class="footer">
         <div class="iconsContact">
-            <a href="mailto:smixbmx@gmail.com"><ion-icon name="mail" id="emailIcon"></ion-icon></a>Posaljite nam mejl
-            <a href="http://www.ruma.rs/portal2/jupgrade/index.php?lang=en"><ion-icon name="locate" id="locateIcon"></ion-icon></a> Ruma
-            <a href="https://www.facebook.com/jupiterruma/"><ion-icon name="logo-facebook" id="facebookIcon"></ion-icon></a> Kontaktiraj nas
+            <a href="mailto:smixbmx@gmail.com" target="_blank"><ion-icon name="mail" id="emailIcon"></ion-icon></a>Posaljite nam mejl
+            <a href="http://www.ruma.rs/portal2/jupgrade/index.php?lang=en" target="_blank"><ion-icon name="locate" id="locateIcon"></ion-icon></a> Ruma
+            <a href="https://www.facebook.com/jupiterruma/" target="_blank"><ion-icon name="logo-facebook" id="facebookIcon"></ion-icon></a> Kontaktiraj nas
         </div>
         @Copywrite Boza Gajic
     </div>
