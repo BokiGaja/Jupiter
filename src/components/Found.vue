@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <app-found-profile></app-found-profile>
-        <app-new-found></app-new-found>
+        <app-new-found v-if="isAdmin"></app-new-found>
         <app-number-of-pages></app-number-of-pages>
     </div>
 </template>
@@ -11,6 +11,11 @@
     import NewFound from './Dogs/NewFound.vue';
     import NoP from './NumberOfPages/numberOfPagesFound.vue'
     export default {
+        data() {
+            return {
+                isAdmin: this.$store.state.admin
+            }
+        },
         components: {
             appFoundProfile: FoundProfile,
             appNewFound: NewFound,

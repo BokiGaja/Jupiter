@@ -6,7 +6,6 @@
                 <p>Ime: {{ dog.ime }}</p>
                 <p>Opis: {{ dog.rasa }}</p>
                 <p>Kontakt: {{  dog.osobine }}</p>
-                <button class="btn btn-primary">Video sam ga</button>
                 <button type="button" class="btn btn-danger" @click="removeDogLost(dogsLost.indexOf(dog))">Izbrisi</button>
             </div>
         </div>
@@ -14,23 +13,40 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex';
-    import { mapGetters } from 'vuex'
+    import { mapGetters } from 'vuex';
+    import axios from 'axios';
     export default {
         data() {
             return {
-                dogsLost: this.$store.state.dogsLost
+                dogsLost: []
+
             }
-        },
-        methods: {
-            ...mapMutations([
-                'removeDogLost'
-            ])
         },
         computed: {
             ...mapGetters([
                 'numberPageLost'
             ])
+        },
+        methods:{
+        removeDogLost(index) {
+            let id = this.dogsLost[index].id;
+            axios.delete("https://jupiter-ru.firebaseio.com/jupiter-ru/lost/" + id +".json")
+            }
+        },
+        created () {
+            axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/lost.json')
+                .then(res => {
+                    const data = res.data;
+                    const users = [];
+                    for (let key in data) {
+                        const user = data[key];
+                        user.id = key;
+                        users.push(user);
+                    }
+                    users.forEach((user) => {
+                        this.dogsLost.push(user)
+                    });
+                })
         }
     }
 </script>

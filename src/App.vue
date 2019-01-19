@@ -4,18 +4,38 @@
     <transition name="slide" mode="out-in">
         <router-view></router-view>
     </transition>
-    <app-footer></app-footer>
+    <app-footer v-if="isAdmin"></app-footer>
   </div>
 </template>
 
 <script>
   import Header from "./components/Header.vue"
   import Footer from './components/Footer.vue'
+  import axios from 'axios'
   export default {
+    data() {
+      return {
+        isAdmin: !this.$store.state.admin
+      }
+    },
     components: {
       appHeader: Header,
       appFooter: Footer
-    }
+    },
+      created() {
+          axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json').then(
+              res => {
+                  const data = res.data;
+                  const users = [];
+                  for (let key in data) {
+                      const user = data[key];
+                      user.id = key;
+                      users.push(user);
+                  }
+                  console.log(users[0].adminLogged);
+                  this.$store.state.admin = users[0].adminLogged;
+              })
+      }
   }
 </script>
 

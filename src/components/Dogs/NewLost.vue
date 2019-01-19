@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import axios from 'axios';
     export default {
         data() {
             return {
@@ -45,9 +45,6 @@
             }
         },
         methods:{
-            ...mapActions({
-                pasIzgubljen: 'addLost'
-            }),
             clearFields() {
                 this.slika = "";
                 this.ime = "";
@@ -55,7 +52,8 @@
                 this.osobine = ""
             },
             handler(slika, ime, rasa, osobine) {
-                this.pasIzgubljen({slika, ime, rasa, osobine});
+                const dataToSend = { slika: this.slika, ime: this.ime, rasa: this.rasa, osobine: this.osobine};
+                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/lost.json', dataToSend);
                 this.clearFields()
             }
         }

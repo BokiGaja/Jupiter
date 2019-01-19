@@ -14,29 +14,14 @@ export const store = new Vuex.Store({
     // And than call them in components with this.$store.state.(name of property)
     // Write it just as property in data => counter: 0
     // If you have two way binding look at tutorial on Udemy
-    dogsLost: [],
-    dogsFound: [],
-    dogsAdopt: [],
-    members: [],
-    donors: [],
-    newMember(slika, ime, status) {
-      this.slika = slika;
-      this.ime = ime;
-      this.status = status;
-    },
-    newDog(slika, ime, rasa, osobine) {
-        this.slika = slika;
-        this.ime = ime;
-        this.rasa = rasa;
-        this.osobine = osobine
-      },
     numPageAdopt: 1,
     numPageLost: 1,
     numPageFound: 1,
     numPageMembers: 1,
     numPageDonors: 1,
     dogForAdoption: "",
-    adoptionInProcess: false
+    adoptionInProcess: false,
+    admin: false
   },
   getters: {
     // Send data from state to our app and here we can change that states before use them
@@ -72,30 +57,9 @@ export const store = new Vuex.Store({
     // To call it use this.$store.commit('nameOfFunction') or use mapMutations just as mapGetters
     // Use mutations in methods: { ...mapMutations(['nameOfFunction]) }
     // All mutations must be synchronous, no setTimeout or setInterval
-    newDogAdopt: (state, {slika, ime, rasa, osobine}) => {
-      var newDog = new state.newDog(slika, ime, rasa, osobine);
-      state.dogsAdopt.push(newDog);
-    },
-    newDogLost: (state, {slika, ime, rasa, osobine}) => {
-      var newDog = new state.newDog(slika, ime, rasa, osobine);
-      state.dogsLost.push(newDog);
-    },
-    newDogFound: (state, {slika, ime, rasa, osobine}) => {
-      var newDog = new state.newDog(slika, ime, rasa, osobine);
-      state.dogsFound.push(newDog);
-    },
     adoptDog: (state, dogsName) => {
       state.dogForAdoption = dogsName;
       state.adoptionInProcess = true;
-    },
-    removeDogAdopt: (state, index) => {
-      state.dogsAdopt.splice(index, 1)
-    },
-    removeDogLost: (state, index) => {
-      state.dogsLost.splice(index, 1)
-    },
-    removeDogFound: (state, index) => {
-      state.dogsFound.splice(index, 1)
     },
     changePageAdopt: (state, newPage) => {
       state.numPageAdopt = newPage;
@@ -106,27 +70,12 @@ export const store = new Vuex.Store({
     changePageFound: (state, newPage) => {
       state.numPageFound = newPage;
     },
-    newMember: (state, {slika, ime, status}) => {
-      var member = new state.newMember(slika, ime, status);
-      state.members.push(member);
-    },
-    newDonor: (state, {slika, ime, status}) => {
-      var donor = new state.newMember(slika, ime, status);
-      state.donors.push(donor);
-    },
-    removeMember: (state, index) => {
-      state.members.splice(index, 1)
-    },
-    removeDonors: (state, index) => {
-      state.donors.splice(index, 1)
-    },
     changePageMembers: (state, newPage) => {
       state.numPageMembers =  newPage
     },
     changePageDonors: (state, newPage) => {
       state.numPageDonors =  newPage
     }
-
   },
   actions: {
     // Here you can run async task and than commit mutations
@@ -136,21 +85,6 @@ export const store = new Vuex.Store({
     // add that argument into commit('method', argument) and also in mutation and in app add it in brackets beside name of action in template
     // If you want more than one argument look on Udemy bookmarked video in VueJS tutorial
     // If you want to use action use mapActions instead of mapMutations
-    addAdopt: ({commit}, {slika, ime, rasa, osobine}) => {
-      commit('newDogAdopt', {slika, ime, rasa, osobine});
-    },
-    addLost: ({commit}, {slika, ime, rasa, osobine}) => {
-      commit('newDogLost', {slika, ime, rasa, osobine});
-    },
-    addFound: ({commit}, {slika, ime, rasa, osobine}) => {
-      commit('newDogFound', {slika, ime, rasa, osobine});
-    },
-    addMember: ({commit}, {slika, ime, status}) => {
-      commit('newMember', {slika, ime, status});
-    },
-    addDonor: ({commit}, {slika, ime, status}) => {
-      commit('newDonor', {slika, ime, status});
-    },
 
   }
 

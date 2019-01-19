@@ -3,7 +3,6 @@
         <div class="membersHeader">
             <button class="btn-members" @click="activateMembers">Clanovi</button>
             <div class="pictureAndButton">
-                <img src="./img/framePaws.jpg" alt="" id="pawsFrame">
                 <button class="btn-primary btn btn-join" @click="join">Uclani se</button>
             </div>
             <button class="btn-donors" @click="activateDonors">Donori</button>
@@ -64,23 +63,14 @@
         flex-direction: column;
         align-items: center;
     }
-    #pawsFrame {
-        zoom: 1.2;
-        position: relative;
-        text-align: center;
-        margin-top: 20px;
-        height: 150px;
-        margin-left: 50px;
-        margin-right: 50px;
-    }
     .membersHeader {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
     .btn-members, .btn-donors{
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
         background-color: #ffc80c;
         border: 0px;
@@ -102,7 +92,7 @@
         background-color: #ffc80c;
         border: 0px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        font-size: 20px;
+        font-size: 30px;
         font-style: italic;
         font-family: Serif;
         cursor: pointer;

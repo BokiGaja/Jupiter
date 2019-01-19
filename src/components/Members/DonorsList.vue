@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <app-donor-profile></app-donor-profile>
-        <app-new-donor></app-new-donor>
+        <app-new-donor v-if="isAdmin"></app-new-donor>
         <app-number-of-pages-donor></app-number-of-pages-donor>
     </div>
 </template>
@@ -11,6 +11,11 @@
     import DonorNew from './NewDonor'
     import NoPDonor from '../NumberOfPages/numberOfPageDonors.vue'
     export default {
+        data() {
+            return {
+                isAdmin: this.$store.state.admin
+            }
+        },
         components: {
             appDonorProfile: DonorsProfile,
             appNewDonor: DonorNew,

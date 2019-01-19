@@ -8,26 +8,48 @@
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control"  placeholder="Ime i prezime">
+                <input type="text" class="form-control"  placeholder="Ime i prezime" v-model="ime">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Kontakt telefon">
+                <input type="text" class="form-control" placeholder="Kontakt telefon" v-model="kontakt">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" aria-describedby="emailHelp"  placeholder="E-mail">
+                <input type="text" class="form-control" aria-describedby="emailHelp"  placeholder="E-mail" v-model="email">
             </div>
-            <button type="submit" class="btn btn-primary">Usvoji</button>
+            <button type="button" class="btn btn-primary" @click="handler(ime, kontakt, email)">Usvoji</button>
         </form>
     </div>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
+    import { mapGetters } from 'vuex';
+    import axios from 'axios'
     export default {
         computed: {
             ...mapGetters({
                 adoptDog: 'adoptDog'
             })
+        },
+        data() {
+            return {
+                ime: "",
+                kontakt: "",
+                email: ""
+            }
+        },
+        methods:{
+            clearFields() {
+                this.ime = "";
+                this.kontakt = "";
+                this.email = ""
+            },
+            handler(ime, kontakt, email) {
+                const dataToSend = { ime: this.ime, kontakt: this.kontakt, email: this.email, ImePsa: this.adoptDog};
+                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/toadopt.json', dataToSend);
+                console.log(this.kontakt);
+                this.clearFields();
+                this.$store.state.adoptionInProcess = false;
+            }
         }
     }
 </script>

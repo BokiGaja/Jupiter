@@ -6,7 +6,6 @@
             </div>
             <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" v-model="slika">
         </div>
-        <!--<input type="text" v-model="slika" class="input-group-text">-->
         <div class="text-part">
             <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
@@ -34,7 +33,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import axios from 'axios'
     export default {
         data() {
             return {
@@ -45,9 +44,6 @@
             }
         },
         methods:{
-            ...mapActions({
-                pasUsvoji: 'addAdopt',
-            }),
             clearFields() {
                 this.slika = "";
                 this.ime = "";
@@ -55,8 +51,9 @@
                 this.osobine = ""
             },
             handler(slika, ime, rasa, osobine) {
-                this.pasUsvoji({slika, ime, rasa, osobine});
-                this.clearFields()
+                const dataToSend = { slika: this.slika, ime: this.ime, rasa: this.rasa, osobine: this.osobine};
+                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/adopt.json', dataToSend);
+                this.clearFields();
             }
         }
     }

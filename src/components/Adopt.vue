@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <app-profile></app-profile>
-        <app-new-profile></app-new-profile>
+        <app-new-profile v-if="isAdmin"></app-new-profile>
         <transition name="slide" mode="out-in">
             <app-adoption-form id="adoption-form" v-if="adoptionProcess"></app-adoption-form>
         </transition>
@@ -16,6 +16,11 @@
     import NoP from './NumberOfPages/numbersOfPages.vue'
     import { mapGetters } from 'vuex'
     export default {
+        data() {
+            return {
+                isAdmin: this.$store.state.admin
+            }
+        },
         computed: {
           ...mapGetters([
               'adoptionProcess'

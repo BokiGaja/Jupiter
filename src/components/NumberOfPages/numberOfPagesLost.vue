@@ -9,17 +9,33 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex'
+    import { mapMutations } from 'vuex';
+    import axios from 'axios'
     export default {
         data() {
             return {
-                dogsLost: this.$store.state.dogsLost
+                dogsLost: []
             }
         },
         methods: {
             ...mapMutations([
                 'changePageLost'
             ])
+        },
+        created () {
+            axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/lost.json')
+                .then(res => {
+                    const data = res.data;
+                    const users = [];
+                    for (let key in data) {
+                        const user = data[key];
+                        user.id = key;
+                        users.push(user);
+                    }
+                    users.forEach((user) => {
+                        this.dogsLost.push(user);
+                    });
+                })
         }
     }
 </script>

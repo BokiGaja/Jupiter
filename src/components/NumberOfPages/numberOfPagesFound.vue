@@ -9,17 +9,33 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex'
+    import { mapMutations } from 'vuex';
+    import axios from 'axios'
     export default {
         data() {
             return {
-                dogsFound: this.$store.state.dogsFound
+                dogsFound: []
             }
         },
         methods: {
             ...mapMutations([
                 'changePageFound'
             ])
+        },
+        created () {
+            axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/found.json')
+                .then(res => {
+                    const data = res.data;
+                    const users = [];
+                    for (let key in data) {
+                        const user = data[key];
+                        user.id = key;
+                        users.push(user);
+                    }
+                    users.forEach((user) => {
+                        this.dogsFound.push(user);
+                    });
+                })
         }
     }
 </script>

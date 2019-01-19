@@ -35,7 +35,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import axios from 'axios'
     export default {
         data() {
             return {
@@ -46,9 +46,6 @@
             }
         },
         methods:{
-            ...mapActions({
-                pasNadjen: 'addFound'
-            }),
             clearFields() {
                 this.slika = "";
                 this.ime = "";
@@ -56,7 +53,8 @@
                 this.osobine = ""
             },
             handler(slika, ime, rasa, osobine) {
-                this.pasNadjen({slika, ime, rasa, osobine});
+                const dataToSend = { slika: this.slika, ime: this.ime, rasa: this.rasa, osobine: this.osobine};
+                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/found.json', dataToSend);
                 this.clearFields()
             }
         }

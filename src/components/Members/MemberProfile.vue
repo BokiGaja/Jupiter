@@ -12,23 +12,39 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex';
-    import { mapGetters } from 'vuex'
+    import { mapGetters } from 'vuex';
+    import axios from 'axios'
     export default {
         data() {
             return {
-                members: this.$store.state.members
+                members: []
             }
         },
         methods: {
-            ...mapMutations([
-                'removeMember'
-            ])
+            removeMember(index) {
+                let id = this.members[index].id;
+                axios.delete("https://jupiter-ru.firebaseio.com/jupiter-ru/members/" + id +".json")
+            }
         },
         computed: {
             ...mapGetters([
                 'numberPageMembers'
             ])
+        },
+        created () {
+            axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/members.json')
+                .then(res => {
+                    const data = res.data;
+                    const users = [];
+                    for (let key in data) {
+                        const user = data[key];
+                        user.id = key;
+                        users.push(user);
+                    }
+                    users.forEach((user) => {
+                        this.members.push(user)
+                    });
+                })
         }
     }
 </script>

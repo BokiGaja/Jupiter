@@ -11,7 +11,7 @@
     transition: transform .2s;
 }
 #picture:hover {
-    transform: scale(3);
+    transform: scale(2);
     z-index: 1;
 }
 .frame {

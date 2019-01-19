@@ -2,20 +2,43 @@
     <div class="adoptionForm">
         <form class="adoptionInput">
             <div class="form-group">
-                <input type="text" class="form-control"  placeholder="Ime i prezime">
+                <input type="text" class="form-control"  placeholder="Ime i prezime" v-model="ime">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="Kontakt telefon">
+                <input type="text" class="form-control" placeholder="Kontakt telefon" v-model="kontakt">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" aria-describedby="emailHelp"  placeholder="E-mail">
+                <input type="text" class="form-control" aria-describedby="emailHelp"  placeholder="E-mail" v-model="email">
             </div>
-            <button type="submit" class="btn btn-primary">Uclani se</button>
+            <button type="button" class="btn btn-primary" @click="handler(ime, kontakt, email)">Uclani se</button>
         </form>
     </div>
 </template>
 
 <script>
+    import axios from 'axios'
+    export default {
+        data() {
+            return {
+                ime: "",
+                kontakt: "",
+                email: ""
+            }
+        },
+        methods:{
+            clearFields() {
+                this.ime = "";
+                this.kontakt = "";
+                this.email = ""
+            },
+            handler(ime, kontakt, email) {
+                const dataToSend = { ime: this.ime, kontakt: this.kontakt, email: this.email};
+                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/join.json', dataToSend);
+                console.log(this.kontakt);
+                this.clearFields();
+            }
+        }
+    }
 </script>
 
 <style scoped>

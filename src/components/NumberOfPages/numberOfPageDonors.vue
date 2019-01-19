@@ -9,17 +9,33 @@
 </template>
 
 <script>
+    import axios from 'axios'
     import { mapMutations } from 'vuex'
     export default {
         data() {
             return {
-                donors: this.$store.state.donors
+                donors: []
             }
         },
         methods: {
             ...mapMutations([
                 'changePageDonors'
             ])
+        },
+        created () {
+            axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/donors.json')
+                .then(res => {
+                    const data = res.data;
+                    const users = [];
+                    for (let key in data) {
+                        const user = data[key];
+                        user.id = key;
+                        users.push(user);
+                    }
+                    users.forEach((user) => {
+                        this.donors.push(user);
+                    });
+                })
         }
     }
 </script>

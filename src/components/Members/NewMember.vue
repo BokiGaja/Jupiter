@@ -28,7 +28,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'
+    import axios from 'axios'
     export default {
         data() {
             return {
@@ -38,17 +38,14 @@
             }
         },
         methods:{
-            ...mapActions({
-                newMember: 'addMember'
-            }),
             clearFields() {
                 this.slika = "";
                 this.ime = "";
-                this.rasa = "";
-                this.osobine = ""
+                this.statusM = "";
             },
             handler(slika, ime, status) {
-                this.newMember({slika, ime, status});
+                const dataToSend = { slika: this.slika, ime: this.ime, status: this.statusM};
+                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/members.json', dataToSend);
                 this.clearFields()
             }
         }
