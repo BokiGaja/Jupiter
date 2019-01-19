@@ -1,7 +1,9 @@
 <template>
     <div class="container">
-        <app-found-profile></app-found-profile>
-        <app-new-found v-if="isAdmin"></app-new-found>
+        <div class="profilePlusNew">
+            <app-new-found v-if="isAdmin"></app-new-found>
+            <app-found-profile></app-found-profile>
+        </div>
         <app-number-of-pages></app-number-of-pages>
     </div>
 </template>

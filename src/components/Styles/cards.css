@@ -5,8 +5,8 @@
     align-content: flex-start;
 }
 #picture {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     border-radius: 15%;
     transition: transform .2s;
 }
@@ -18,7 +18,7 @@
     background: url("../img/adoptionFormBackground.jpg") center;
     background-size: 50%;
     width: 450px;
-    height: 250px;
+    height: 220px;
     border-radius: 20%;
     display: flex;
     flex-direction: row;

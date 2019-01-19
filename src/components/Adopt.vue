@@ -1,7 +1,9 @@
 <template>
     <div class="container">
-        <app-profile></app-profile>
-        <app-new-profile v-if="isAdmin"></app-new-profile>
+        <div class="profilePlusNew">
+            <app-new-profile v-if="isAdmin"></app-new-profile>
+            <app-profile></app-profile>
+        </div>
         <transition name="slide" mode="out-in">
             <app-adoption-form id="adoption-form" v-if="adoptionProcess"></app-adoption-form>
         </transition>

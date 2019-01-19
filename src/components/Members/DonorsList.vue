@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <app-donor-profile></app-donor-profile>
         <app-new-donor v-if="isAdmin"></app-new-donor>
+        <app-donor-profile></app-donor-profile>
         <app-number-of-pages-donor></app-number-of-pages-donor>
     </div>
 </template>

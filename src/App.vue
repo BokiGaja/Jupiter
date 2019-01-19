@@ -15,7 +15,15 @@
   export default {
     data() {
       return {
-        isAdmin: !this.$store.state.admin
+      }
+    },
+    computed: {
+      isAdmin() {
+        if (this.$store.state.admin) {
+          return false;
+        } else {
+          return true;
+        }
       }
     },
     components: {
@@ -42,6 +50,7 @@
 <style>
   @import "./components/Styles/InOutAnim.css";
   #app{
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;

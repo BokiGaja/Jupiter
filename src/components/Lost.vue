@@ -1,7 +1,7 @@
 <template>
    <div class="container">
-       <app-lost-profile></app-lost-profile>
        <app-new-lost v-if="isAdmin"></app-new-lost>
+       <app-lost-profile></app-lost-profile>
        <app-number-of-pages></app-number-of-pages>
    </div>
 </template>

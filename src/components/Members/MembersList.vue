@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <app-members-profile></app-members-profile>
         <app-new-member v-if="isAdmin"></app-new-member>
+        <app-members-profile></app-members-profile>
         <app-number-of-pages-member></app-number-of-pages-member>
     </div>
 </template>
