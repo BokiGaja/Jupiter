@@ -8,7 +8,7 @@
                 <p>Rasa: {{ dogAdopt.rasa }}</p>
                 <p>Osobine: {{  dogAdopt.osobine }}</p>
                 <button class="btn btn-primary" @click="adoptDog(dogsToAdopt[dogsToAdopt.indexOf(dogAdopt)].ime)">Usvoji</button>
-                <button type="button" class="btn btn-danger" @click="removeDogAdopt(dogsToAdopt.indexOf(dogAdopt))">Izbrisi</button>
+                <button type="button" class="btn btn-danger" @click="removeDogAdopt(dogsToAdopt.indexOf(dogAdopt))" v-if="isAdmin">Izbrisi</button>
             </div>
         </div>
     </div>
@@ -21,7 +21,8 @@
     export default {
         data() {
             return {
-                dogsToAdopt: []
+                dogsToAdopt: [],
+                isAdmin: this.$store.state.admin
             }
         },
         methods: {

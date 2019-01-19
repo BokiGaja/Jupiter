@@ -9,7 +9,7 @@
                     <input type="text" class="form-control"  placeholder="Korisnicko ime" v-model="username">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Sifra" v-model="password">
+                    <input type="password" class="form-control" placeholder="Sifra" v-model="password">
                 </div>
                 <button type="button" class="btn btn-primary" @click="checkIfAdmin">Uclani se</button>
             </form>

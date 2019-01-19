@@ -6,7 +6,7 @@
                 <p>Ime: {{ dog.ime }}</p>
                 <p>Opis: {{ dog.rasa }}</p>
                 <p>Kontakt: {{  dog.osobine }}</p>
-                <button type="button" class="btn btn-danger" @click="removeDogFound(dogsFound.indexOf(dog))">Izbrisi</button>
+                <button type="button" class="btn btn-danger" @click="removeDogFound(dogsFound.indexOf(dog))" v-if="isAdmin">Izbrisi</button>
             </div>
         </div>
     </div>
@@ -18,7 +18,8 @@
     export default {
         data() {
             return {
-                dogsFound: []
+                dogsFound: [],
+                isAdmin: this.$store.state.admin
             }
         },
         methods: {

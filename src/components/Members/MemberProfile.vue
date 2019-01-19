@@ -5,7 +5,7 @@
             <div class="text-part">
                 <p>Ime: {{ member.ime }}</p>
                 <p>Status: {{ member.status }}</p>
-                <button type="button" class="btn btn-danger" @click="removeMember(members.indexOf(member))">Izbrisi</button>
+                <button type="button" class="btn btn-danger" @click="removeMember(members.indexOf(member))" v-if="isAdmin">Izbrisi</button>
             </div>
         </div>
     </div>
@@ -17,7 +17,8 @@
     export default {
         data() {
             return {
-                members: []
+                members: [],
+                isAdmin: this.$store.state.admin
             }
         },
         methods: {

@@ -5,7 +5,7 @@
             <div class="text-part">
                 <p>Ime: {{ donor.ime }}</p>
                 <p>Donacija: {{ donor.status }}</p>
-                <button type="button" class="btn btn-danger" @click="removeDonors(donors.indexOf(donor))">Izbrisi</button>
+                <button type="button" class="btn btn-danger" @click="removeDonors(donors.indexOf(donor))" v-if="isAdmin">Izbrisi</button>
             </div>
         </div>
     </div>
@@ -17,7 +17,8 @@
     export default {
         data() {
             return {
-                donors: []
+                donors: [],
+                isAdmin: this.$store.state.admin
             }
         },
         methods: {
