@@ -5,7 +5,7 @@
             <a href="http://www.ruma.rs/portal2/jupgrade/index.php?lang=en" target="_blank"><ion-icon name="locate" id="locateIcon"></ion-icon></a> Ruma
             <a href="https://www.facebook.com/jupiterruma/" target="_blank"><ion-icon name="logo-facebook" id="facebookIcon"></ion-icon></a> Kontaktiraj nas
         </div>
-        @Copywrite Boza Gajic
+        Copyright &#169; 2019 BozaGajic
     </div>
 </template>
 
