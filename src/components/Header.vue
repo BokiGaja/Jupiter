@@ -8,10 +8,10 @@
                     <router-link to="/dogs" class="nav-link routes" active-class="active"> Psi </router-link>
                 </li>
                 <li class="nav-item">
-                    <img src="./img/JupiterLogo.jpg" alt="" id="jupiterImg">
+                    <img src="../img/JupiterLogo.jpg" alt="" id="jupiterImg">
                 </li>
                 <li class="nav-item">
-                    <router-link :to="{ name: 'members'}" class="nav-link routes" active-class="active"> Clanstvo </router-link>
+                    <router-link :to="{ name: 'membersList'}" class="nav-link routes" active-class="active"> Clanstvo </router-link>
                 </li>
                 <li class="nav-item">
                     <router-link :to="{ name: 'contacts'}" class="nav-link routes" active-class="active"> Doniraj </router-link>

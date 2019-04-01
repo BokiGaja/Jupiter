@@ -15,9 +15,9 @@
     z-index: 1;
 }
 .frame {
-    background: url("../img/adoptionFormBackground.jpg") center;
+    background: url("../../img/adoptionFormBackground.jpg") center;
     background-size: 50%;
-    width: 450px;
+    max-width: 450px;
     height: 220px;
     border-radius: 20%;
     display: flex;

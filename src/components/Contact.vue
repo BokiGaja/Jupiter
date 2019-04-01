@@ -1,17 +1,16 @@
 <template>
     <div class="container donate">
-        <img src="./img/ZiroRacun.jpg" alt="" style="margin-top: 20px">
-        <button class="btn btn-danger " v-if="closeAdmin" @click="closeAdminWindow"><ion-icon name="power"></ion-icon></button>
-
-        <div class="adminFrame" v-if="loginForm">
+        <img src="../img/ZiroRacun.jpg" alt="" style="margin-top: 10px">
+        <button class="btn btn-danger " v-if="isAdmin" @click="logout"><ion-icon name="power"></ion-icon></button>
+        <div class="adminFrame" v-if="!isAdmin">
             <form class="adminInput">
                 <div class="form-group">
-                    <input type="text" class="form-control"  placeholder="Korisnicko ime" v-model="username">
+                    <input type="text" class="form-control"  placeholder="Korisnicko ime" v-model="username" required>
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="Sifra" v-model="password">
+                    <input type="password" class="form-control" placeholder="Sifra" v-model="password" required>
                 </div>
-                <button type="button" class="btn btn-primary" @click="checkIfAdmin">Uclani se</button>
+                <button type="button" class="btn btn-primary" @click="login">Uloguj se</button>
             </form>
         </div>
     </div>
@@ -19,62 +18,45 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import { isAdmin } from "../mixins/isAdmin";
+    import { axiosService, extractData } from "../../services/AxiosService";
+
     export default {
         data() {
             return{
                 username: "",
                 password: "",
-                loginForm: true,
-                closeAdmin: false,
-                admins: []
+                loginForm: null,
+                isAdmin: null
             }
         },
+
+        mixins: [isAdmin],
+
         methods: {
-            closeAdminWindow() {
-                this.loginForm = false;
-                this.closeAdmin = false;
-                this.$store.state.admin = false;
-                this.username = "";
-                this.password = "";
-                axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json').then(
-                    res => {
-                        axios.delete('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json', res.data.id);
-                        axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json', {adminLogged: false})
-                    }
-                );
+            async logout() {
+                await axiosService.put('loggedIn.json', false);
+                location.reload();
             },
-            checkIfAdmin() {
-                this.admins.forEach((admin) => {
+
+            async login() {
+                let admins = [];
+                let loggedIn = false;
+                await axiosService.get('admins').then(res => extractData(res, admins));
+                admins.forEach(async (admin) => {
                     if (admin.username === this.username && admin.password === this.password) {
-                        this.$store.state.admin = true;
-                        axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json').then(
-                            res => {
-                                axios.delete('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json', res.data.id);
-                                axios.post('https://jupiter-ru.firebaseio.com/jupiter-ru/isAdmin.json', {adminLogged: true})
-                            }
-                        )
+                        this.username = "";
+                        this.password = "";
+                        loggedIn = true;
+                        await axiosService.put('loggedIn.json', true);
+                        location.reload();
                     }
                 });
+                if (!loggedIn) {
+                    alert('Wrong credentials');
+                }
             }
         },
-            created() {
-                axios.get('https://jupiter-ru.firebaseio.com/jupiter-ru/admins.json')
-                    .then(res => {
-                        const data = res.data;
-                        const users = [];
-                        for (let key in data) {
-                            const user = data[key];
-                            user.id = key;
-                            users.push(user);
-                        }
-                        users.forEach((user) => {
-                            this.admins.push(user);
-                        });
-                            this.loginForm = !this.$store.state.admin;
-                            this.closeAdmin = this.$store.state.admin;
-                    });
-            }
     }
 </script>
 
@@ -91,6 +73,6 @@
         align-items: center;
     }
     .adminFrame {
-        background: url("./img/adoptionFormBackground.jpg");
+        background: url("../img/adoptionFormBackground.jpg");
     }
 </style>
